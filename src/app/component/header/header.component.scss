@@ -1,0 +1,37 @@
+@import '../../common.scss';
+
+.main {
+    height: $padding * 8;
+}
+
+.main-each {
+    margin: 0px;
+}
+
+.title {
+    // box-sizing: border-box;
+    // border: 1px solid red;
+    width: 200px;
+    cursor: pointer;
+}
+.title:hover {
+    text-decoration: underline;
+}
+
+.navs {
+    // box-sizing: border-box;
+    // border: 1px solid red;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 100%;
+    padding-right: $padding * 3;
+}
+
+.nav {
+    padding-left: $padding * 2;
+    cursor: pointer;
+}
+.nav:hover {
+    text-decoration: underline;
+}
