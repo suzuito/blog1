@@ -1,1 +1,15 @@
 $padding: 6px;
+
+$header-height: $padding * 8;
+
+@mixin global-header {
+    height: $header-height;
+}
+
+@mixin global-content {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: $header-height;
+    bottom: 0px;
+}

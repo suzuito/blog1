@@ -1,7 +1,7 @@
 @import '../../common.scss';
 
 .main {
-    height: $padding * 8;
+    @include global-header()
 }
 
 .main-each {
