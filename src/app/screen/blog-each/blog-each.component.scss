@@ -1,0 +1,29 @@
+@import '../../common.scss';
+
+.global-content {
+    @include global-content();
+}
+
+.tags {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+app-article-tag {
+    padding-right: $padding;
+}
+
+mat-card {
+    padding: $padding;
+    border-radius: 0px;
+}
+
+.title {
+    margin: 0px;
+}
+
+.padding {
+    height: $padding;
+    width: $padding;
+}

@@ -1,0 +1,36 @@
+@import '../../common.scss';
+
+mat-card {
+    padding: $padding;
+    border-radius: 0px;
+}
+
+.title {
+    margin: 0px;
+    cursor: pointer;
+}
+
+.title:hover {
+    text-decoration: underline;
+}
+
+.padding {
+    width: $padding;
+    height: $padding;
+}
+
+mat-chip {
+    cursor: pointer;
+    margin: 0px;
+    min-height: $font-size-caption;
+    font-size: $font-size-caption;
+}
+
+.published-at {
+    text-align: right;
+}
+
+app-article-tag {
+    padding-right: $padding;
+    padding-bottom: $padding;
+}

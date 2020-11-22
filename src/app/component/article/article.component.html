@@ -1,0 +1,12 @@
+<mat-card>
+    <mat-card-content>
+        <div class='mat-h3 title' *ngIf='article' (click)='clickTitle.emit()'>{{article.title}}</div>
+        <mat-chip-list *ngIf='article'>
+            <app-article-tag *ngFor='let tag of article.tags' [tag]='tag' (click)='clickTag.emit(tag)'>
+                {{tag.name}}
+            </app-article-tag>
+        </mat-chip-list>
+        <div class='padding'></div>
+        <div class='published-at' *ngIf='article'>{{article.publishedAt*1000 | date:'yyyy/MM/dd'}}</div>
+    </mat-card-content>
+</mat-card>

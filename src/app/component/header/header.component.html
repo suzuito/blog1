@@ -1,7 +1,9 @@
-<mat-toolbar class='main'>
-    <div class='mat-h1 main-each title'>フルクラム</div>
+<mat-toolbar class='main' color='primary'>
+    <div class='mat-h1 main-each title' [routerLink]='[""]'>
+        <img src='assets/fulcrum.png' height=42 />
+    </div>
     <div class='mat-h3 main-each navs'>
-        <div class='nav'>日記</div>
+        <div class='nav' [routerLink]='["/blog"]'>日記</div>
         <div class='nav'>About</div>
     </div>
 </mat-toolbar>

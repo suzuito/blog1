@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Logger } from '../../entity/service/logger';
 import { Cursor } from '../../entity/model/cursor';
-import { Location } from '@angular/common';
-
 
 export interface StreamProvider<T> {
     fetchBottom(
@@ -207,18 +205,12 @@ export class StreamComponent<T> {
                 );
             }
         }
-        const bottomData = this.bottomData();
-        if (!bottomData) {
-            return;
-        }
         await fetcher
             .then(v => this.addDatasToTop(...v))
             .then(() => {
                 if (scrollTop === null) {
-                    if (loadopt.initScrollBottom) {
-                        if (!this.bottomData()) {
-                            return;
-                        }
+                    const bottomData = this.bottomData();
+                    if (loadopt.initScrollBottom && bottomData) {
                         this.scrollTo(this.scrollTopAtBottom(this.key(bottomData)));
                         return;
                     }
@@ -240,12 +232,12 @@ export class StreamComponent<T> {
         if (this.isLoading) {
             return;
         }
-        const topData = this.topData();
-        if (!topData) {
+        const topDataBeforeFetch = this.topData();
+        if (!topDataBeforeFetch) {
             return;
         }
         this.isLoading = true;
-        await this.streamProvider.fetchTop(this.cursorGetter(topData), this.opt.fetchLength, false)
+        await this.streamProvider.fetchTop(this.cursorGetter(topDataBeforeFetch), this.opt.fetchLength, false)
             .then(v => new Promise<Array<T>>(resolve => {
                 setTimeout(() => resolve(v), this.opt.waitTimeMilliSeconds);
             }))
@@ -254,7 +246,6 @@ export class StreamComponent<T> {
                 if (v.length <= 0) {
                     return;
                 }
-                const topDataBeforeFetch = this.topData();
                 if (!topDataBeforeFetch) {
                     return;
                 }
@@ -273,12 +264,12 @@ export class StreamComponent<T> {
         if (this.isLoading) {
             return;
         }
-        const bottomData = this.bottomData();
-        if (!bottomData) {
+        const bottomDataBeforeFetch = this.bottomData();
+        if (!bottomDataBeforeFetch) {
             return;
         }
         this.isLoading = true;
-        await this.streamProvider.fetchBottom(this.cursorGetter(bottomData), this.opt.fetchLength, false)
+        await this.streamProvider.fetchBottom(this.cursorGetter(bottomDataBeforeFetch), this.opt.fetchLength, false)
             .then(v => new Promise<Array<T>>(resolve => {
                 setTimeout(() => resolve(v), this.opt.waitTimeMilliSeconds);
             }))
@@ -287,7 +278,6 @@ export class StreamComponent<T> {
                 if (v.length <= 0) {
                     return;
                 }
-                const bottomDataBeforeFetch = this.bottomData();
                 if (!bottomDataBeforeFetch) {
                     return;
                 }

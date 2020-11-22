@@ -1,0 +1,20 @@
+@import '../../common.scss';
+
+.main {
+    cursor: pointer;
+    font-size: $font-size-caption;
+    padding-left: $font-size-caption * 0.25;
+    padding-right: $font-size-caption * 0.25;
+    padding-top: $font-size-caption * 0.1;
+    padding-bottom: $font-size-caption * 0.1;
+
+    border-radius: 0;
+
+    white-space: nowrap;
+
+    background: grey;
+}
+
+.main:hover {
+    text-decoration: underline;
+}
