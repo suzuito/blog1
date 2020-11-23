@@ -14,6 +14,12 @@ mat-card {
     text-decoration: underline;
 }
 
+.tags {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 .padding {
     width: $padding;
     height: $padding;
