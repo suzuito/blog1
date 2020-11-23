@@ -1,0 +1,21 @@
+name: minilla-deploy
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - qa
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm install
+      - run: npm run build-minilla
+      - uses: w9jds/firebase-action@master
+        with:
+          args: deploy --project=terakoya-minilla
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
