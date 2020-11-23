@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ArticleComponent } from './component/article/article.component';
 import { ArticleTagComponent } from './component/article-tag/article-tag.component';
 import { BlogEachComponent } from './screen/blog-each/blog-each.component';
+import { AboutComponent } from './screen/about/about.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { BlogEachComponent } from './screen/blog-each/blog-each.component';
     ArticleComponent,
     ArticleTagComponent,
     BlogEachComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

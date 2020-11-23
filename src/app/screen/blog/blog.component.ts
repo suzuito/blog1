@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArticleGroup, ArticleService } from 'src/app/article.service';
 import { StreamComponent, StreamCursorStoreService } from 'src/app/component/stream/stream.component';
@@ -10,7 +10,7 @@ import { Logger } from 'src/app/entity/service/logger';
   templateUrl: './blog.component.html',
   styleUrls: ['./blog.component.scss']
 })
-export class BlogComponent extends StreamComponent<Article> implements OnInit, AfterViewInit {
+export class BlogComponent extends StreamComponent<Article> implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('top')
   public elTop: ElementRef | null;
@@ -46,6 +46,11 @@ export class BlogComponent extends StreamComponent<Article> implements OnInit, A
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    this.save(ArticleGroup.List);
+    this.onDestroy();
   }
 
   async ngAfterViewInit(): Promise<void> {

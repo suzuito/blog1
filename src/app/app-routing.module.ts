@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import { AboutComponent } from './screen/about/about.component';
 import { BlogEachComponent } from './screen/blog-each/blog-each.component';
 import { BlogEachGuard } from './screen/blog-each/blog-each.guard';
 import { BlogComponent } from './screen/blog/blog.component';
@@ -14,7 +15,10 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: TopComponent,
+        component: BlogComponent,
+        canActivate: [
+          BlogGuard,
+        ],
       },
       {
         path: 'blog',
@@ -29,6 +33,10 @@ const routes: Routes = [
         canActivate: [
           BlogEachGuard,
         ],
+      },
+      {
+        path: 'about',
+        component: AboutComponent,
       }
     ],
   }
