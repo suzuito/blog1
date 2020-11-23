@@ -1,7 +1,7 @@
 <mat-card>
     <mat-card-content>
         <div class='mat-h3 title' *ngIf='article' (click)='clickTitle.emit()'>{{article.title}}</div>
-        <div *ngIf='article'>
+        <div *ngIf='article' class='tags'>
             <app-article-tag *ngFor='let tag of article.tags' [tag]='tag' (click)='clickTag.emit(tag)'>
                 {{tag.name}}
             </app-article-tag>

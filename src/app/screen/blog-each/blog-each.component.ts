@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl, SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl, SafeHtml, Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleRawService, getArticleRawURL } from 'src/app/article-raw.service';
 import { ArticleService } from 'src/app/article.service';
 import { Article, Tag } from 'src/app/entity/model/diary';
+import { FixedMetasDefault, MetaService, newArticleMetas } from 'src/app/meta.service';
+import { BlogEachService } from './blog-each.service';
 
 @Component({
   selector: 'app-blog-each',
@@ -12,27 +14,30 @@ import { Article, Tag } from 'src/app/entity/model/diary';
 })
 export class BlogEachComponent implements OnInit {
 
-  public article: Article | null;
-  public rawArticle: SafeHtml;
-
   constructor(
-    private articleService: ArticleService,
-    private articleRawService: ArticleRawService,
-    private route: ActivatedRoute,
-    private sanitizer: DomSanitizer,
+    private blogEachService: BlogEachService,
+    private metaService: MetaService,
+    private titleService: Title,
   ) {
-    this.article = null;
-    this.rawArticle = '<h1>hello</h1>';
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(v => {
-      const articleId = v.articleId;
-      if (articleId) {
-        this.articleService.fetchArticle(articleId).then(u => this.article = u);
-        this.articleRawService.fetchArticle(articleId).then(u => this.rawArticle = this.sanitizer.bypassSecurityTrustHtml(u));
-      }
-    });
+    if (this.article === null) {
+      return;
+    }
+    this.titleService.setTitle(this.article.title);
+    this.metaService.setMetas(newArticleMetas(
+      this.article,
+      `${location.origin}${location.pathname}`,
+    ));
+  }
+
+  get article(): Article | null {
+    return this.blogEachService.article;
+  }
+
+  get articleRaw(): SafeHtml | null {
+    return this.blogEachService.rawArticle;
   }
 
   clickTag(tag: Tag): void { }

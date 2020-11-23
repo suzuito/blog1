@@ -1,9 +1,11 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArticleGroup, ArticleService } from 'src/app/article.service';
 import { StreamComponent, StreamCursorStoreService } from 'src/app/component/stream/stream.component';
 import { Article, ArticleCursor, newArticleCursor } from 'src/app/entity/model/diary';
 import { Logger } from 'src/app/entity/service/logger';
+import { FixedMetasDefault, MetaService, SiteName } from 'src/app/meta.service';
 
 @Component({
   selector: 'app-blog',
@@ -23,6 +25,8 @@ export class BlogComponent extends StreamComponent<Article> implements OnInit, A
 
   constructor(
     private router: Router,
+    private metaService: MetaService,
+    private titleService: Title,
     logger: Logger,
     provider: ArticleService,
     cursorStore: StreamCursorStoreService,
@@ -46,6 +50,8 @@ export class BlogComponent extends StreamComponent<Article> implements OnInit, A
   }
 
   ngOnInit(): void {
+    this.titleService.setTitle(SiteName);
+    this.metaService.setMetas(FixedMetasDefault);
   }
 
   ngOnDestroy(): void {
