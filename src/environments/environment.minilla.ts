@@ -7,5 +7,5 @@ export const environment = {
             baseUrl: 'https://storage.googleapis.com/blog-static-minilla/articles',
         },
     },
-    production: false
+    production: true
 };
