@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ArticleRawService, getArticleRawURL } from 'src/app/article-raw.service';
 import { ArticleService } from 'src/app/article.service';
 import { Article, Tag } from 'src/app/entity/model/diary';
-import { FixedMetasDefault, MetaService, newArticleMetas } from 'src/app/meta.service';
+import { FixedMetasDefault, MetaService, newArticleMetas, SiteName } from 'src/app/meta.service';
 import { BlogEachService } from './blog-each.service';
 
 @Component({
@@ -25,7 +25,7 @@ export class BlogEachComponent implements OnInit {
     if (this.article === null) {
       return;
     }
-    this.titleService.setTitle(this.article.title);
+    this.titleService.setTitle(`${this.article.title} | ${SiteName}`);
     this.metaService.setMetas(newArticleMetas(
       this.article,
       `${location.origin}${location.pathname}`,
