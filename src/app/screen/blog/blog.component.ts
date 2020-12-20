@@ -47,11 +47,11 @@ export class BlogComponent extends StreamComponent<Article> implements OnInit, A
     this.elParent = null;
     this.elBottom = null;
     this.elTop = null;
+    this.titleService.setTitle(SiteName);
+    this.metaService.setMetas(FixedMetasDefault);
   }
 
   ngOnInit(): void {
-    this.titleService.setTitle(SiteName);
-    this.metaService.setMetas(FixedMetasDefault);
   }
 
   ngOnDestroy(): void {
