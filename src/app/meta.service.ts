@@ -3,7 +3,7 @@ import { Meta, MetaDefinition } from '@angular/platform-browser';
 import { Article } from './entity/model/diary';
 
 export const SiteName = 'fulcrum';
-export const SiteDescription = '今日の私は精一杯生きただろうか。我々はどう死ぬべきか。もう一度真剣に考えようではないか。';
+export const SiteDescription = 'とあるプログラマのブログです。本サイトは、皆さんに「読ませる」ためのサイトではなく、僕が「書く」ためのもの。';
 export const SiteLocale = 'ja_JP';
 
 function newMetas(
