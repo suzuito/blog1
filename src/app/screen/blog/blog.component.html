@@ -1,5 +1,5 @@
 <app-header current='blog'></app-header>
-<lib-ngx-mugen-scroll #stream class='global-content' [provider]='provider'>
+<lib-ngx-mugen-scroll #stream class='global-content' [provider]='provider' countPerLoadMode='small'>
     <div libMugenScrollTop style='height: 40px;'>
         <app-spinner1 [diameter]='20' [isLoading]='isLoading' (clickRefresh)='clickTop()'></app-spinner1>
     </div>
