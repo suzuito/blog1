@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -5,7 +6,8 @@ import { ArticleGroup, ArticleService } from 'src/app/article.service';
 import { StreamComponent, StreamCursorStoreService } from 'src/app/component/stream/stream.component';
 import { Article, ArticleCursor, newArticleCursor } from 'src/app/entity/model/diary';
 import { Logger } from 'src/app/entity/service/logger';
-import { FixedMetasDefault, MetaService, SiteName } from 'src/app/meta.service';
+import { LdJsonService } from 'src/app/ld-json.service';
+import { FixedMetasDefault, MetaService, SiteDescription, SiteName } from 'src/app/meta.service';
 
 @Component({
   selector: 'app-blog',
@@ -27,6 +29,7 @@ export class BlogComponent extends StreamComponent<Article> implements OnInit, A
     private router: Router,
     private metaService: MetaService,
     private titleService: Title,
+    private ldJSONService: LdJsonService,
     logger: Logger,
     provider: ArticleService,
     cursorStore: StreamCursorStoreService,
@@ -49,6 +52,12 @@ export class BlogComponent extends StreamComponent<Article> implements OnInit, A
     this.elTop = null;
     this.titleService.setTitle(SiteName);
     this.metaService.setMetas(FixedMetasDefault);
+    this.ldJSONService.setWebPage(
+      location.href,
+      SiteName,
+      SiteName,
+      SiteDescription,
+    );
   }
 
   ngOnInit(): void {
