@@ -1,14 +1,14 @@
 <app-header current='blog'></app-header>
-<div #parent class='global-content'>
-    <div #top style='height: 40px;'>
+<lib-ngx-mugen-scroll #stream class='global-content' [provider]='provider'>
+    <div libMugenScrollTop style='height: 40px;'>
         <app-spinner1 [diameter]='20' [isLoading]='isLoading' (clickRefresh)='clickTop()'></app-spinner1>
     </div>
-    <div *ngFor='let article of datas; let i = index' [attr.key]='key(article)'>
+    <div *libMugenScrollData='let article = data' class='data'>
         <app-article [article]='article' (clickTitle)='clickArticle(article)'>
         </app-article>
         <mat-divider></mat-divider>
     </div>
-    <div #bottom style='height: 40px;'>
+    <div libMugenScrollBottom style='height: 40px;'>
         <app-spinner1 [diameter]='20' [isLoading]='isLoading' (clickRefresh)='clickBottom()'></app-spinner1>
     </div>
-</div>
+</lib-ngx-mugen-scroll>

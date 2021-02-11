@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Cursor, CursorStoreInfo, DataProvider } from 'ngx-mugen-scroll';
 import { ApiService } from './api.service';
 import { StreamProvider } from './component/stream/stream.component';
 import { cursorSorterAsc, cursorSorterDesc } from './entity/model/cursor';
@@ -12,7 +13,7 @@ export enum ArticleGroup {
 @Injectable({
   providedIn: 'root'
 })
-export class ArticleService implements StreamProvider<Article> {
+export class ArticleService implements DataProvider<Article> {
 
   private articleGroupInternal: ArticleGroup;
   private stores: OrderedDataStores<Article>;
@@ -26,6 +27,14 @@ export class ArticleService implements StreamProvider<Article> {
       cursorSorterDesc,
       v => v.id,
     );
+  }
+
+  newCursor(v: Article): Cursor {
+    return new ArticleCursor(v.publishedAt, v.title);
+  }
+
+  get scrollId(): string {
+    return `articles-${this.articleGroupInternal}`;
   }
 
   set articleGroup(v: ArticleGroup) {
@@ -64,5 +73,17 @@ export class ArticleService implements StreamProvider<Article> {
     const results = await this.api.getArticlesLargerN(cursor, n);
     this.stores.add(...results.datas);
     return this.stores.getLargerN(cursor, n, includeEqual);
+  }
+
+  async fetchOnInit(n: number): Promise<Array<Article>> {
+    return this.fetchBottom(
+      new ArticleCursor(Date.now() / 1000, ''),
+      n,
+      true,
+    );
+  }
+
+  async fetchOnLoad(info: CursorStoreInfo): Promise<Array<Article>> {
+    throw new Error('Not impl');
   }
 }
