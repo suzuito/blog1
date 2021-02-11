@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ArticleRawService, getArticleRawURL } from 'src/app/article-raw.service';
 import { ArticleService } from 'src/app/article.service';
 import { Article, Tag } from 'src/app/entity/model/diary';
+import { LdJsonService } from 'src/app/ld-json.service';
 import { FixedMetasDefault, MetaService, newArticleMetas, SiteName } from 'src/app/meta.service';
 import { BlogEachService } from './blog-each.service';
 
@@ -16,6 +17,7 @@ export class BlogEachComponent implements OnInit {
 
   constructor(
     private blogEachService: BlogEachService,
+    private ldJSONService: LdJsonService,
     private metaService: MetaService,
     private titleService: Title,
   ) {
@@ -30,6 +32,15 @@ export class BlogEachComponent implements OnInit {
       this.article,
       `${location.origin}${location.pathname}`,
     ));
+    this.ldJSONService.setBlogPost(
+      location.href,
+      this.article.title,
+      this.article.description,
+      this.article.description,
+      this.article.publishedAt,
+      undefined,
+      this.article.tags.map(v => v.name),
+    );
   }
 
   get article(): Article | null {

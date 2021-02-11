@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { LdJsonService } from './ld-json.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'blog1';
+  private schema: object;
+
+  constructor(
+    private sanitizer: DomSanitizer,
+    private ldJSONService: LdJsonService,
+  ) {
+    this.schema = {};
+  }
+
+  get ldJSON(): SafeHtml {
+    return this.ldJSONService.ldJSON;
+  }
 }
