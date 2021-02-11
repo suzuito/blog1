@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Cursor, CursorStoreInfo, DataProvider } from 'ngx-mugen-scroll';
 import { ApiService } from './api.service';
-import { StreamProvider } from './component/stream/stream.component';
-import { cursorSorterAsc, cursorSorterDesc } from './entity/model/cursor';
+import { cursorSorterDesc } from './entity/model/cursor';
 import { Article, ArticleCursor, newArticleCursor } from './entity/model/diary';
 import { OrderedDataStores } from './ordered-data-stores';
 
@@ -84,6 +83,10 @@ export class ArticleService implements DataProvider<Article> {
   }
 
   async fetchOnLoad(info: CursorStoreInfo): Promise<Array<Article>> {
-    throw new Error('Not impl');
+    return await this.fetchBottom(
+      info.topCursor as ArticleCursor,
+      info.n,
+      true,
+    );
   }
 }

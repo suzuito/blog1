@@ -40,7 +40,10 @@ export class BlogComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
   }
 
-  async ngAfterViewInit(): Promise<void> {
+  ngAfterViewInit(): void {
+    if (this.stream === undefined) {
+      throw new Error('stream is undefined');
+    }
   }
 
   async clickTop(): Promise<void> {
@@ -74,6 +77,10 @@ export class BlogComponent implements OnInit, AfterViewInit {
   }
 
   clickArticle(article: Article): void {
+    if (this.stream === undefined) {
+      throw new Error('stream is undefined');
+    }
+    this.stream.saveScrollPosition();
     this.router.navigate(['blog', article.id]);
   }
 }
