@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { NgxMugenScrollModule } from 'ngx-mugen-scroll';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -40,6 +41,7 @@ import { AboutComponent } from './screen/about/about.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    NgxMugenScrollModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,

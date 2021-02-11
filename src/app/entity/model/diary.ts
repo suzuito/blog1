@@ -1,4 +1,4 @@
-import { Cursor } from './cursor';
+import { Cursor } from 'ngx-mugen-scroll';
 
 export interface Article {
     id: string;
@@ -17,19 +17,9 @@ export function newArticleCursor(a: Article): ArticleCursor {
     );
 }
 
-export class ArticleCursor implements Cursor {
-    constructor(public publishedAt: number, public title: string) { }
-    get length(): number {
-        return 2;
-    }
-    toString(): string {
-        return `${this.publishedAt}-${this.title}`;
-    }
-    getItem(i: number): number | string {
-        if (i === 0) {
-            return this.publishedAt;
-        }
-        return this.title;
+export class ArticleCursor extends Cursor {
+    constructor(public publishedAt: number, public title: string) {
+        super([publishedAt, title]);
     }
 }
 
