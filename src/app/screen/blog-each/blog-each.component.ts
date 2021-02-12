@@ -43,6 +43,10 @@ export class BlogEachComponent implements OnInit {
     );
   }
 
+  get ldJSON(): SafeHtml {
+    return this.ldJSONService.ldJSON;
+  }
+
   get article(): Article | null {
     return this.blogEachService.article;
   }

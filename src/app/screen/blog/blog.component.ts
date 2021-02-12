@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { SafeHtml, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NgxMugenScrollComponent } from 'ngx-mugen-scroll';
 import { ArticleService } from 'src/app/article.service';
@@ -44,6 +44,10 @@ export class BlogComponent implements OnInit, AfterViewInit {
     if (this.stream === undefined) {
       throw new Error('stream is undefined');
     }
+  }
+
+  get ldJSON(): SafeHtml {
+    return this.ldJSONService.ldJSON;
   }
 
   async clickTop(): Promise<void> {
