@@ -14,7 +14,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './component/header/header.component';
-import { TopComponent } from './screen/top/top.component';
 import { BlogComponent } from './screen/blog/blog.component';
 import { Spinner1Component } from './component/spinner1/spinner1.component';
 import { ConsoleLogger, Logger } from './entity/service/logger';
@@ -28,7 +27,6 @@ import { AboutComponent } from './screen/about/about.component';
   declarations: [
     AppComponent,
     HeaderComponent,
-    TopComponent,
     BlogComponent,
     Spinner1Component,
     ArticleComponent,

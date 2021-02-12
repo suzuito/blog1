@@ -8,16 +8,8 @@ import { LdJsonService } from './ld-json.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  private schema: object;
 
   constructor(
-    private sanitizer: DomSanitizer,
-    private ldJSONService: LdJsonService,
   ) {
-    this.schema = {};
-  }
-
-  get ldJSON(): SafeHtml {
-    return this.ldJSONService.ldJSON;
   }
 }
