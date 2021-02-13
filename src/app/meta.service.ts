@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Meta, MetaDefinition } from '@angular/platform-browser';
 import { Article } from './entity/model/diary';
 
-export const SiteName = 'fulcrum';
+export const SiteName = 'otiuzu pages';
 export const SiteDescription = 'とあるプログラマのブログです。本サイトは、皆さんに「読ませる」ためのサイトではなく、僕が「書く」ためのもの。';
 export const SiteLocale = 'ja_JP';
 

@@ -22,6 +22,7 @@ import { ArticleComponent } from './component/article/article.component';
 import { ArticleTagComponent } from './component/article-tag/article-tag.component';
 import { BlogEachComponent } from './screen/blog-each/blog-each.component';
 import { AboutComponent } from './screen/about/about.component';
+import { NotFoundComponent } from './screen/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { AboutComponent } from './screen/about/about.component';
     ArticleTagComponent,
     BlogEachComponent,
     AboutComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ import { BlogEachComponent } from './screen/blog-each/blog-each.component';
 import { BlogEachGuard } from './screen/blog-each/blog-each.guard';
 import { BlogComponent } from './screen/blog/blog.component';
 import { BlogGuard } from './screen/blog/blog.guard';
+import { NotFoundComponent } from './screen/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -36,9 +37,10 @@ const routes: Routes = [
       {
         path: 'about',
         component: AboutComponent,
-      }
+      },
+      { path: '404', component: NotFoundComponent },
     ],
-  }
+  },
 ];
 
 @NgModule({

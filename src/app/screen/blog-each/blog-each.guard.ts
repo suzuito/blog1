@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { ArticleRawService } from 'src/app/article-raw.service';
 import { ArticleService } from 'src/app/article.service';
 import { BlogEachService } from './blog-each.service';
@@ -14,6 +14,7 @@ export class BlogEachGuard implements CanActivate {
     private articleRawService: ArticleRawService,
     private blogEachService: BlogEachService,
     private sanitizer: DomSanitizer,
+    private router: Router,
   ) { }
 
   async canActivate(
@@ -24,10 +25,15 @@ export class BlogEachGuard implements CanActivate {
     if (!articleId) {
       return false;
     }
-    const article = await this.articleService.fetchArticle(articleId);
-    const articleRaw = await this.articleRawService.fetchArticle(articleId);
-    this.blogEachService.article = article;
-    this.blogEachService.rawArticle = this.sanitizer.bypassSecurityTrustHtml(articleRaw);
+    try {
+      const article = await this.articleService.fetchArticle(articleId);
+      const articleRaw = await this.articleRawService.fetchArticle(articleId);
+      this.blogEachService.article = article;
+      this.blogEachService.rawArticle = this.sanitizer.bypassSecurityTrustHtml(articleRaw);
+    } catch (err) {
+      this.router.navigate(['404']);
+      return false;
+    }
     return true;
   }
 
