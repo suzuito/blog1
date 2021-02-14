@@ -5,6 +5,7 @@ import { Article } from './entity/model/diary';
 export const SiteName = 'otiuzu pages';
 export const SiteDescription = 'とあるプログラマのブログです。本サイトは、皆さんに「読ませる」ためのサイトではなく、僕が「書く」ためのもの。';
 export const SiteLocale = 'ja_JP';
+export const SiteOrigin = 'https://blog.tach.dev';
 
 function newMetas(
   a: {
@@ -44,7 +45,7 @@ export const FixedMetasDefault: Array<MetaDefinition> = newMetas({
   ogDescription: SiteDescription,
   ogTitle: SiteName,
   ogLocale: SiteLocale,
-  ogUrl: location.origin,
+  ogUrl: SiteOrigin,
   ogSiteName: SiteName,
   ogType: 'website',
   description: SiteDescription,

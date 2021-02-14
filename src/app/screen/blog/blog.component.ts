@@ -5,7 +5,8 @@ import { NgxMugenScrollComponent } from 'ngx-mugen-scroll';
 import { ArticleService } from 'src/app/article.service';
 import { Article } from 'src/app/entity/model/diary';
 import { LdJsonService } from 'src/app/ld-json.service';
-import { FixedMetasDefault, MetaService, SiteDescription, SiteName } from 'src/app/meta.service';
+import { FixedMetasDefault, MetaService, SiteDescription, SiteName, SiteOrigin } from 'src/app/meta.service';
+import { RelCanonicalService } from 'src/app/rel-canonical.service';
 
 @Component({
   selector: 'app-blog',
@@ -25,6 +26,7 @@ export class BlogComponent implements OnInit, AfterViewInit {
     private titleService: Title,
     private ldJSONService: LdJsonService,
     public provider: ArticleService,
+    private rcService: RelCanonicalService,
   ) {
     this.titleService.setTitle(SiteName);
     this.metaService.setMetas(FixedMetasDefault);
@@ -34,6 +36,7 @@ export class BlogComponent implements OnInit, AfterViewInit {
       SiteName,
       SiteDescription,
     );
+    this.rcService.update(`${SiteOrigin}${location.pathname}`);
     this.isLoading = false;
   }
 

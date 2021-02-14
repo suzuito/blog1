@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl, SafeHtml, Title } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
-import { ArticleRawService, getArticleRawURL } from 'src/app/article-raw.service';
-import { ArticleService } from 'src/app/article.service';
+import { SafeHtml, Title } from '@angular/platform-browser';
 import { Article, Tag } from 'src/app/entity/model/diary';
 import { LdJsonService } from 'src/app/ld-json.service';
-import { FixedMetasDefault, MetaService, newArticleMetas, SiteName } from 'src/app/meta.service';
+import { MetaService, newArticleMetas, SiteName, SiteOrigin } from 'src/app/meta.service';
+import { RelCanonicalService } from 'src/app/rel-canonical.service';
 import { BlogEachService } from './blog-each.service';
 
 @Component({
@@ -20,6 +18,7 @@ export class BlogEachComponent implements OnInit {
     private ldJSONService: LdJsonService,
     private metaService: MetaService,
     private titleService: Title,
+    private rcService: RelCanonicalService,
   ) {
   }
 
@@ -30,8 +29,9 @@ export class BlogEachComponent implements OnInit {
     this.titleService.setTitle(`${this.article.title} | ${SiteName}`);
     this.metaService.setMetas(newArticleMetas(
       this.article,
-      `${location.origin}${location.pathname}`,
+      `${SiteOrigin}${location.pathname}`,
     ));
+    this.rcService.update(`${SiteOrigin}${location.pathname}`);
     this.ldJSONService.setBlogPost(
       location.href,
       this.article.title,
