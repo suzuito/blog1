@@ -40,12 +40,11 @@ export class LdJsonService {
     description: string,
   ): void {
     this.data = {
-      url,
-      name,
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      mainEntityOfPage: url,
       headline,
       description,
-      '@type': 'WebSite',
-      '@context': 'https://schema.org',
     };
   }
 
@@ -60,17 +59,17 @@ export class LdJsonService {
   ): void {
     articleBody = articleBody.substring(0, 100);
     const data: any = {
-      url,
-      headline,
-      description,
-      articleBody,
-      datePublished: this.toDateString(datePublished),
-      '@type': 'BlogPosting',
       '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      mainEntityOfPage: url,
+      headline,
+      keywords,
+      datePublished: this.toDateString(datePublished),
       author: {
         '@type': 'Person',
         name: 'Suzuito',
       },
+      description,
     };
     if (image !== undefined) {
       data.image = image;
