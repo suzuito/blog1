@@ -1,54 +1,51 @@
 import { Injectable } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class LdJsonService {
+function toDateString(at: number): string {
+  const a = new Date(at * 1000);
+  let r = '';
+  r += `${a.getFullYear()}`;
+  r += '-';
+  if (a.getMonth() < 10) {
+    r += `0${a.getMonth()}`;
+  } else {
+    r += `${a.getMonth()}`;
+  }
+  r += '-';
+  if (a.getDate() < 10) {
+    r += `0${a.getDate()}`;
+  } else {
+    r += `${a.getDate()}`;
+  }
+  return r;
+}
 
-  private data: object;
-
+export class LdJSONGenerator {
+  private data: Array<object>;
   constructor(
     private sanitizer: DomSanitizer,
   ) {
-    this.data = {};
+    this.data = [];
   }
 
-  private toDateString(at: number): string {
-    const a = new Date(at * 1000);
-    let r = '';
-    r += `${a.getFullYear()}`;
-    r += '-';
-    if (a.getMonth() < 10) {
-      r += `0${a.getMonth()}`;
-    } else {
-      r += `${a.getMonth()}`;
-    }
-    r += '-';
-    if (a.getDate() < 10) {
-      r += `0${a.getDate()}`;
-    } else {
-      r += `${a.getDate()}`;
-    }
-    return r;
-  }
-
-  setWebPage(
+  addWebPage(
     url: string,
     name: string,
     headline: string,
     description: string,
-  ): void {
-    this.data = {
+  ): LdJSONGenerator {
+    this.data.push({
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       mainEntityOfPage: url,
       headline,
       description,
-    };
+    });
+    return this;
   }
 
-  setBlogPost(
+  addBlogPost(
     url: string,
     headline: string,
     description: string,
@@ -56,15 +53,15 @@ export class LdJsonService {
     datePublished: number,
     image: string | undefined,
     keywords: Array<string>,
-  ): void {
+  ): LdJSONGenerator {
     articleBody = articleBody.substring(0, 100);
-    const data: any = {
+    const a: any = {
       '@context': 'https://schema.org',
       '@type': 'BlogPosting',
       mainEntityOfPage: url,
       headline,
       keywords,
-      datePublished: this.toDateString(datePublished),
+      datePublished: toDateString(datePublished),
       author: {
         '@type': 'Person',
         name: 'Suzuito',
@@ -72,15 +69,62 @@ export class LdJsonService {
       description,
     };
     if (image !== undefined) {
-      data.image = image;
+      a.image = image;
     }
     if (keywords.length > 0) {
-      data.keywords = keywords.join(' ');
+      a.keywords = keywords.join(' ');
     }
-    this.data = data;
+    this.data.push(a);
+    return this;
   }
 
-  get ldJSON(): SafeHtml {
+  /*
+  addBreadcrumbs(route: ActivatedRoute): LdJSONGenerator {
+    let current = route;
+    const breadcrumbs: any = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [],
+    };
+    while (true) {
+      if (current.parent === null) {
+        break;
+      }
+      if (current.routeConfig === null) {
+        continue;
+      }
+      current.
+      breadcrumbs.itemListElement.unshift({
+        '@type': 'ListItem',
+        position: -1,
+        item: {
+          '@id': `${location.origin}/${current.routeConfig.path}`,
+        },
+      });
+      console.log(current.routeConfig);
+      current = current.parent;
+    }
+    this.data.push(breadcrumbs);
+    return this;
+  }
+  */
+
+  generate(): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(`<script type="application/ld+json">${JSON.stringify(this.data)}</script>`);
+  }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class LdJsonService {
+
+  constructor(
+    private sanitizer: DomSanitizer,
+  ) {
+  }
+
+  generator(): LdJSONGenerator {
+    return new LdJSONGenerator(this.sanitizer);
   }
 }

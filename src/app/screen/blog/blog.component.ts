@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { NgxMugenScrollComponent } from 'ngx-mugen-scroll';
 import { ArticleService } from 'src/app/article.service';
 import { Article } from 'src/app/entity/model/diary';
-import { LdJsonService } from 'src/app/ld-json.service';
+import { LdJSONGenerator, LdJsonService } from 'src/app/ld-json.service';
 import { FixedMetasDefault, MetaService, SiteDescription, SiteName, SiteOrigin } from 'src/app/meta.service';
 import { RelCanonicalService } from 'src/app/rel-canonical.service';
 
@@ -16,6 +16,8 @@ import { RelCanonicalService } from 'src/app/rel-canonical.service';
 export class BlogComponent implements OnInit, AfterViewInit {
 
   public isLoading: boolean;
+
+  private ldJSONGenerator: LdJSONGenerator;
 
   @ViewChild('stream')
   public stream: NgxMugenScrollComponent | undefined;
@@ -30,7 +32,8 @@ export class BlogComponent implements OnInit, AfterViewInit {
   ) {
     this.titleService.setTitle(SiteName);
     this.metaService.setMetas(FixedMetasDefault);
-    this.ldJSONService.setWebPage(
+    this.ldJSONGenerator = this.ldJSONService.generator();
+    this.ldJSONGenerator.addWebPage(
       location.href,
       SiteName,
       SiteName,
@@ -50,7 +53,7 @@ export class BlogComponent implements OnInit, AfterViewInit {
   }
 
   get ldJSON(): SafeHtml {
-    return this.ldJSONService.ldJSON;
+    return this.ldJSONGenerator.generate();
   }
 
   async clickTop(): Promise<void> {

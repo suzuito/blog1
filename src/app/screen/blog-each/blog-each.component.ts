@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SafeHtml, Title } from '@angular/platform-browser';
 import { Article, Tag } from 'src/app/entity/model/diary';
-import { LdJsonService } from 'src/app/ld-json.service';
+import { LdJSONGenerator, LdJsonService } from 'src/app/ld-json.service';
 import { MetaService, newArticleMetas, SiteName, SiteOrigin } from 'src/app/meta.service';
 import { RelCanonicalService } from 'src/app/rel-canonical.service';
 import { BlogEachService } from './blog-each.service';
@@ -13,6 +13,8 @@ import { BlogEachService } from './blog-each.service';
 })
 export class BlogEachComponent implements OnInit {
 
+  public ldJSONGenerator: LdJSONGenerator;
+
   constructor(
     private blogEachService: BlogEachService,
     private ldJSONService: LdJsonService,
@@ -20,6 +22,7 @@ export class BlogEachComponent implements OnInit {
     private titleService: Title,
     private rcService: RelCanonicalService,
   ) {
+    this.ldJSONGenerator = this.ldJSONService.generator();
   }
 
   ngOnInit(): void {
@@ -32,7 +35,7 @@ export class BlogEachComponent implements OnInit {
       `${SiteOrigin}${location.pathname}`,
     ));
     this.rcService.update(`${SiteOrigin}${location.pathname}`);
-    this.ldJSONService.setBlogPost(
+    this.ldJSONGenerator.addBlogPost(
       location.href,
       this.article.title,
       this.article.description,
@@ -44,7 +47,7 @@ export class BlogEachComponent implements OnInit {
   }
 
   get ldJSON(): SafeHtml {
-    return this.ldJSONService.ldJSON;
+    return this.ldJSONGenerator.generate();
   }
 
   get article(): Article | null {
