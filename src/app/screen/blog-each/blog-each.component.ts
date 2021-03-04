@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { SafeHtml, Title } from '@angular/platform-browser';
 import { Article, Tag } from 'src/app/entity/model/diary';
 import { LdJSONGenerator, LdJsonService } from 'src/app/ld-json.service';
@@ -6,12 +6,14 @@ import { MetaService, newArticleMetas, SiteName, SiteOrigin } from 'src/app/meta
 import { RelCanonicalService } from 'src/app/rel-canonical.service';
 import { BlogEachService } from './blog-each.service';
 
+declare const hljs: any;
+
 @Component({
   selector: 'app-blog-each',
   templateUrl: './blog-each.component.html',
   styleUrls: ['./blog-each.component.scss']
 })
-export class BlogEachComponent implements OnInit {
+export class BlogEachComponent implements OnInit, AfterViewInit {
 
   public ldJSONGenerator: LdJSONGenerator;
 
@@ -44,6 +46,10 @@ export class BlogEachComponent implements OnInit {
       undefined,
       this.article.tags.map(v => v.name),
     );
+  }
+
+  ngAfterViewInit(): void {
+    hljs.highlightAll();
   }
 
   get ldJSON(): SafeHtml {
