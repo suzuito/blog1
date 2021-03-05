@@ -8,6 +8,15 @@ export interface Article {
     updatedAt: number;
     publishedAt: number;
     tags: Array<Tag>;
+    images: Array<ArticleImage>;
+}
+
+export interface ArticleImage {
+    width: number;
+    height: number;
+    url: string;
+    realWidth: number;
+    realHeight: number;
 }
 
 export function newArticleCursor(a: Article): ArticleCursor {
