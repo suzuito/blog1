@@ -5,7 +5,8 @@ on:
       - main
     tags:
       - qa
-
+  schedule:
+    - cron: "0 * * * *"
 jobs:
   deploy:
     name: Deploy
