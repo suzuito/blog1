@@ -43,7 +43,12 @@ export class BlogEachComponent implements OnInit, AfterViewInit {
       this.article.description,
       this.article.description,
       this.article.publishedAt,
-      undefined,
+      this.article.images.length <= 0 ? undefined : {
+        url: this.article.images[0].url,
+        width: this.article.images[0].realWidth,
+        height: this.article.images[0].realHeight,
+        '@type': 'ImageObject',
+      },
       this.article.tags.map(v => v.name),
     );
   }
