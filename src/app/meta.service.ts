@@ -15,6 +15,7 @@ function newMetas(
     ogUrl: string,
     ogSiteName: string,
     ogType: string,
+    ogImage?: string,
     description: string,
   },
 ): Array<MetaDefinition> {
@@ -25,6 +26,7 @@ function newMetas(
   if (a.ogDescription) { r.push({ property: 'og:description', content: a.ogDescription }); }
   if (a.ogUrl) { r.push({ property: 'og:url', content: a.ogUrl }); }
   if (a.ogSiteName) { r.push({ property: 'og:site_name', content: a.ogSiteName }); }
+  if (a.ogImage) { r.push({ property: 'og:image', content: a.ogImage }); }
   if (a.description) { r.push({ name: 'description', content: a.description }); }
   return r;
 }
@@ -37,6 +39,7 @@ export function newArticleMetas(article: Article, url: string): Array<MetaDefini
     ogSiteName: SiteName,
     ogType: 'article',
     ogUrl: url,
+    ogImage: article.images.length > 0 ? article.images[0].url : undefined,
     description: article.description,
   });
 }

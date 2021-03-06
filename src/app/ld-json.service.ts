@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+
+export interface SchemaImageObject {
+  url: string;
+  width: number;
+  height: number;
+  '@type': 'ImageObject';
+}
 
 function toDateString(at: number): string {
   const a = new Date(at * 1000);
@@ -51,7 +57,7 @@ export class LdJSONGenerator {
     description: string,
     articleBody: string,
     datePublished: number,
-    image: string | undefined,
+    image: SchemaImageObject | undefined,
     keywords: Array<string>,
   ): LdJSONGenerator {
     articleBody = articleBody.substring(0, 100);
