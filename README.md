@@ -3,10 +3,6 @@
 ## Development
 
 ```bash
-gsutil cors set cors.json gs://suzuito-godzilla-blog1-server
-gsutil cors set cors.json gs://suzuito-godzilla-blog1-article
-# gsutil cors set cors.json gs://suzuito-minilla-blog1-server
-# gsutil cors set cors.json gs://suzuito-minilla-blog1-article
 npm start
 ```
 
