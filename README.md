@@ -3,7 +3,7 @@
 ## Development
 
 ```bash
-gsutil cors set gcs-cors-dev.json gs://blog-static-minilla
+gsutil cors set gcs-cors-dev.json gs://suzuito-godzilla-blog1-server
 npm start
 ```
 

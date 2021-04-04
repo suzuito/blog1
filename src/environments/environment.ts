@@ -7,7 +7,7 @@ export const environment: Env = {
   },
   storage: {
     article: {
-      baseUrl: 'https://storage.googleapis.com/blog-static-minilla/articles',
+      baseUrl: 'https://suzuito-godzilla-blog1-article.storage.googleapis.com',
     },
   },
   production: false
