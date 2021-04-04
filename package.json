@@ -6,6 +6,7 @@
     "start": "ng serve --host 0.0.0.0",
     "build": "ng build",
     "build-minilla": "ng build --configuration=minilla && bash generate-sitemap.sh https://api-blog.tach.dev https://blog.tach.dev dist/blog1 && cp robots.txt dist/blog1",
+    "build-godzilla": "ng build --configuration=godzilla && bash generate-sitemap.sh https://api-blog.tach.dev https://blog.tach.dev dist/blog1 && cp robots.txt dist/blog1",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
