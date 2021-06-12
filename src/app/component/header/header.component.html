@@ -5,5 +5,13 @@
     <div class='mat-h3 main-each navs'>
         <div class='nav' [routerLink]='["/blog"]'>日記</div>
         <div class='nav' [routerLink]='["/about"]'>About</div>
+        <div class='nav' [matMenuTriggerFor]="menu">設定</div>
     </div>
 </mat-toolbar>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item (click)='clickSwitchTheme()'>
+        <mat-icon>format_color_fill</mat-icon>
+        <span *ngIf='isLightMode()'>ダークモードへ</span>
+        <span *ngIf='!isLightMode()'>ライトモードへ</span>
+    </button>
+</mat-menu>

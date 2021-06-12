@@ -9,6 +9,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -49,6 +50,7 @@ import { NotFoundComponent } from './screen/not-found/not-found.component';
     MatCardModule,
     MatChipsModule,
     MatDividerModule,
+    MatMenuModule,
   ],
   providers: [
     { provide: Logger, useValue: new ConsoleLogger(), },

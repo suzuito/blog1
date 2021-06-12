@@ -1,10 +1,48 @@
 /* You can add global styles to this file, and also import other style files */
+@use '~@angular/material' as mat;
 
+// Theme
+
+// Prebuild
+// @import '@angular/material/prebuilt-themes/pink-bluegrey.css';
+// @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+@include mat.core();
+
+// Define themes
+
+// Summer theme
+$summer-theme-light-primary: mat.define-palette(mat.$light-blue-palette, 500);
+$summer-theme-light-accent: mat.define-palette(mat.$red-palette, 800);
+
+$summer-theme-dark-primary: mat.define-palette(mat.$blue-palette, 900);
+$summer-theme-dark-accent: mat.define-palette(mat.$yellow-palette, 500);
+
+$summer-theme-light: mat.define-light-theme((
+ color: (
+   primary: $summer-theme-light-primary,
+   accent: $summer-theme-light-accent,
+ )
+));
+
+$summer-theme-dark: mat.define-dark-theme((
+ color: (
+   primary: $summer-theme-dark-primary,
+   accent: $summer-theme-dark-accent,
+ )
+));
+
+@include mat.core-theme($summer-theme-light);
+@include mat.all-component-themes($summer-theme-light);
+
+.dark-theme {
+  @include mat.core-color($summer-theme-dark);
+  @include mat.all-component-colors($summer-theme-dark);
+}
+
+// Style
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 a {
     color: inherit;
 }
-
-@import '@angular/material/prebuilt-themes/pink-bluegrey.css';
-// @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
