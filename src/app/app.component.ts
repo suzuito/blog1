@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { LdJsonService } from './ld-json.service';
+import { ThemeManagerService } from './theme-manager.service';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,18 @@ import { LdJsonService } from './ld-json.service';
 export class AppComponent {
 
   constructor(
+    private themeManager: ThemeManagerService,
   ) {
+  }
+
+  isLightMode(): boolean {
+    return this.themeManager.isLightMode();
+  }
+
+  class(): string {
+    if (this.themeManager.isLightMode()) {
+      return '';
+    }
+    return 'dark-theme';
   }
 }

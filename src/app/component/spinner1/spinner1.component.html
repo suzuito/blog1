@@ -1,10 +1,6 @@
-<div style='display: flex; flex-direction: row; justify-content: center;'>
-    <div *ngIf='isLoading'>
-        <mat-spinner [diameter]='diameter' style='text-align: center;'></mat-spinner>
-    </div>
-    <div *ngIf='!isLoading'>
-        <button mat-icon-button (click)='clickRefresh.emit()'>
-            <mat-icon>refresh</mat-icon>
-        </button>
-    </div>
+<div style='display: flex; flex-direction: row; justify-content: center;' class='mat-app-background'>
+    <mat-spinner *ngIf='isLoading' [diameter]='diameter' style='text-align: center;'></mat-spinner>
+    <button *ngIf='!isLoading' mat-icon-button (click)='clickRefresh.emit()'>
+        <mat-icon>refresh</mat-icon>
+    </button>
 </div>
