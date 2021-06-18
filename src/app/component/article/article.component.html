@@ -7,6 +7,6 @@
             </app-article-tag>
         </div>
         <div class='padding'></div>
-        <div class='published-at' *ngIf='article'>{{article.publishedAt*1000 | date:'yyyy/MM/dd'}}</div>
+        <div class='published-at' *ngIf='article'>{{article.publishedAt*1000 | date:'yyyy/MM/dd hh:mm:ss'}}</div>
     </mat-card-content>
 </mat-card>
