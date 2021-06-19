@@ -1,4 +1,6 @@
-export const environment = {
+import { Env } from './common';
+
+export const environment: Env = {
     api: {
         baseUrl: 'https://api-blog.tach.dev',
     },

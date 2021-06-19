@@ -1,22 +1,24 @@
-name: deploy-suzuito-godzilla
+name: deploy-suzuito-minilla
 on:
   push:
     tags:
-      - "v[0-9]+.[0-9]+.[0-9]+"
+      - "qa"
+  schedule:
+    - cron: "0 * * * *"
 jobs:
-  deploy-suzuito-godzilla:
+  deploy-suzuito-minilla:
     name: Deploy
     runs-on: ubuntu-latest
     env:
-      GCP_PROJECT_ID: suzuito-godzilla
+      GCP_PROJECT_ID: suzuito-minilla
     steps:
       - uses: actions/checkout@v2
       - run: npm install
-      - run: npm run build-godzilla
+      - run: npm run build-minilla
       - uses: google-github-actions/setup-gcloud@master
         with:
           project_id: ${{env.GCP_PROJECT_ID}}
-          service_account_key: ${{ secrets.GCP_SA_KEY_GODZILLA }}
+          service_account_key: ${{ secrets.GCP_SA_KEY_MINILLA }}
           export_default_credentials: true
       - run: gsutil rm -r gs://${{env.GCP_PROJECT_ID}}-blog1-server/*
         continue-on-error: true
