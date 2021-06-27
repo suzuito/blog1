@@ -1,0 +1,3 @@
+Sitemap: https://minilla-blog.tach.dev/sitemap.xml
+User-agent: *
+Disallow: /

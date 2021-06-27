@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
 import { SafeHtml, Title } from '@angular/platform-browser';
-import { Article, Tag } from 'src/app/entity/model/diary';
+import { Article, ArticleIndex, Tag } from 'src/app/entity/model/diary';
 import { LdJSONGenerator, LdJsonService } from 'src/app/ld-json.service';
 import { MetaService, newArticleMetas, SiteName, SiteOrigin } from 'src/app/meta.service';
 import { RelCanonicalService } from 'src/app/rel-canonical.service';
@@ -23,6 +23,7 @@ export class BlogEachComponent implements OnInit, AfterViewInit {
     private metaService: MetaService,
     private titleService: Title,
     private rcService: RelCanonicalService,
+    private elParent: ElementRef,
   ) {
     this.ldJSONGenerator = this.ldJSONService.generator();
   }
@@ -65,10 +66,20 @@ export class BlogEachComponent implements OnInit, AfterViewInit {
     return this.blogEachService.article;
   }
 
+  get articleToc(): Array<ArticleIndex> {
+    if (this.blogEachService.article === null) {
+      return [];
+    }
+    return this.blogEachService.article.toc;
+  }
+
   get articleRaw(): SafeHtml | null {
     return this.blogEachService.rawArticle;
   }
 
   clickTag(tag: Tag): void { }
 
+  clickToTop(): void {
+    window.scrollTo({ top: 0 });
+  }
 }

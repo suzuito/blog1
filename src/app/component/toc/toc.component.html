@@ -1,0 +1,43 @@
+<ul>
+    <ng-container *ngFor='let index of articleToc'>
+        <ng-container *ngIf='index.level === 1'>
+            <li><a [routerLink]="['.']" [fragment]='index.id'>{{index.name}}</a>
+            </li>
+        </ng-container>
+        <ng-container *ngIf='index.level === 2'>
+            <ul>
+                <li><a [routerLink]="['.']" [fragment]='index.id'>{{index.name}}</a>
+                </li>
+            </ul>
+        </ng-container>
+        <ng-container *ngIf='index.level === 3'>
+            <ul>
+                <ul>
+                    <li><a [routerLink]="['.']" [fragment]='index.id'>{{index.name}}</a>
+                    </li>
+                </ul>
+            </ul>
+        </ng-container>
+        <ng-container *ngIf='index.level === 4'>
+            <ul>
+                <ul>
+                    <ul>
+                        <li><a [routerLink]="['.']" [fragment]='index.id'>{{index.name}}</a>
+                        </li>
+                    </ul>
+                </ul>
+            </ul>
+        </ng-container>
+        <ng-container *ngIf='index.level === 5'>
+            <ul>
+                <ul>
+                    <ul>
+                        <ul>
+                            <li><a [routerLink]="['.']" [fragment]='index.id'>{{index.name}}</a></li>
+                        </ul>
+                    </ul>
+                </ul>
+            </ul>
+        </ng-container>
+    </ng-container>
+</ul>

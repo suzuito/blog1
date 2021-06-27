@@ -27,3 +27,15 @@ mat-card {
     height: $padding;
     width: $padding;
 }
+
+.padding-bottom {
+    height: $padding * 10;
+}
+
+.ops {
+    position: fixed;
+    right: $padding;
+    bottom: $padding;
+    // opacity: 0.5;
+    z-index: 10;
+}

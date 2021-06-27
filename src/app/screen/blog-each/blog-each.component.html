@@ -2,7 +2,7 @@
 <app-header current='blog-each'></app-header>
 <div class='global-content mat-app-background'>
     <mat-card>
-        <mat-card-content>
+        <mat-card-content *ngIf='article'>
             <h1 class='title' *ngIf='article'>{{article.title}}</h1>
             <div class='padding'></div>
             <div class='mat-body' *ngIf='article'>{{article.publishedAt * 1000 | date:'yyyy/MM/dd hh:mm:ss'}}</div>
@@ -14,7 +14,16 @@
             </div>
             <div class='padding'></div>
             <div class='padding'></div>
+            <app-toc [articleToc]='articleToc'></app-toc>
+            <div class='padding'></div>
+            <div class='padding'></div>
             <div [innerHTML]="articleRaw"></div>
+            <div class='padding-bottom'></div>
         </mat-card-content>
     </mat-card>
+</div>
+<div class='ops'>
+    <button mat-raised-button (click)='clickToTop()'>
+        トップへ
+    </button>
 </div>
