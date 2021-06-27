@@ -5,7 +5,6 @@ $header-height: $padding * 8;
 $font-size-caption: 14px;
 
 @mixin global-header {
-    position: fixed;
     height: $header-height;
     z-index: 10;
 }

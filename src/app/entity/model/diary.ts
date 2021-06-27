@@ -9,6 +9,7 @@ export interface Article {
     publishedAt: number;
     tags: Array<Tag>;
     images: Array<ArticleImage>;
+    toc: Array<ArticleIndex>;
 }
 
 export interface ArticleImage {
@@ -35,4 +36,10 @@ export class ArticleCursor extends Cursor {
 export interface Tag {
     name: string;
     createdAt: number;
+}
+
+export interface ArticleIndex {
+    id: string;
+    name: string;
+    level: number;
 }
