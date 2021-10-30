@@ -4,6 +4,8 @@ $header-height: $padding * 8;
 
 $font-size-caption: 14px;
 
+$smp-width: 500px;
+
 @mixin global-header {
     height: $header-height;
     z-index: 10;

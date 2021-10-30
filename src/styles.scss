@@ -9,40 +9,88 @@
 
 @include mat.core();
 
+// Define palette
+
+$dark-primary-text: rgba(black, 0.87);
+$light-primary-text: white;
+
+$main1-palette: (
+  100: #F5F5F5,
+  200: #EEEEEE,
+  300: #E0E0E0,
+  400: #BDBDBD,
+  500: #9E9E9E,
+  600: #757575,
+  700: #616161,
+  800: #424242,
+  900: #212121,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $dark-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+  )
+);
+
+// Define typography
+
+$typography1: mat.define-typography-config(
+  $font-family: 'Roboto',
+);
+
 // Define themes
 
-// Summer theme
-$summer-theme-light-primary: mat.define-palette(mat.$light-blue-palette, 500);
-$summer-theme-light-accent: mat.define-palette(mat.$red-palette, 800);
+// theme1
+$theme-light-primary: mat.define-palette($main1-palette, 900);
+$theme-light-accent: mat.define-palette(mat.$red-palette, 800);
 
-$summer-theme-dark-primary: mat.define-palette(mat.$blue-palette, 900);
-$summer-theme-dark-accent: mat.define-palette(mat.$yellow-palette, 500);
+$theme-dark-primary: mat.define-palette($main1-palette, 900);
+$theme-dark-accent: mat.define-palette(mat.$yellow-palette, 500);
 
-$summer-theme-light: mat.define-light-theme((
+$theme-light: mat.define-light-theme((
  color: (
-   primary: $summer-theme-light-primary,
-   accent: $summer-theme-light-accent,
+   primary: $theme-light-primary,
+   accent: $theme-light-accent,
+ ),
+ typography: $typography1,
+));
+
+$theme-dark: mat.define-dark-theme((
+ color: (
+   primary: $theme-dark-primary,
+   accent: $theme-dark-accent,
  )
 ));
 
-$summer-theme-dark: mat.define-dark-theme((
- color: (
-   primary: $summer-theme-dark-primary,
-   accent: $summer-theme-dark-accent,
- )
-));
+@include mat.core-theme($theme-light);
+@include mat.all-component-themes($theme-light);
 
-@include mat.core-theme($summer-theme-light);
-@include mat.all-component-themes($summer-theme-light);
+.light-theme {
+  @include mat.core-color($theme-light);
+  @include mat.all-component-colors($theme-light);
+  background: white;
+}
 
 .dark-theme {
-  @include mat.core-color($summer-theme-dark);
-  @include mat.all-component-colors($summer-theme-dark);
+  @include mat.core-color($theme-dark);
+  @include mat.all-component-colors($theme-dark);
+  background: black;
 }
 
 // Style
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 a {
     color: inherit;
 }

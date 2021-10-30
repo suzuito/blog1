@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { SafeHtml, Title } from '@angular/platform-browser';
 import { Article, ArticleIndex, Tag } from 'src/app/entity/model/diary';
 import { LdJSONGenerator, LdJsonService } from 'src/app/ld-json.service';
@@ -16,6 +16,9 @@ declare const hljs: any;
 export class BlogEachComponent implements OnInit, AfterViewInit {
 
   public ldJSONGenerator: LdJSONGenerator;
+
+  @ViewChild('mainContent')
+  public elMainContent: ElementRef | undefined;
 
   constructor(
     private blogEachService: BlogEachService,
@@ -80,6 +83,8 @@ export class BlogEachComponent implements OnInit, AfterViewInit {
   clickTag(tag: Tag): void { }
 
   clickToTop(): void {
-    window.scrollTo({ top: 0 });
+    if (this.elMainContent !== undefined) {
+      this.elMainContent?.nativeElement.scrollTo({ top: 0 });
+    }
   }
 }

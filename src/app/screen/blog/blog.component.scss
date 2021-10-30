@@ -1,7 +1,21 @@
 @import '../../common.scss';
 
-.global-content {
-    @include global-content();
+.stream {
+    @media screen and (max-width: $smp-width) {
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        top: $header-height;
+        bottom: 0px;
+    }
+    @media screen and (min-width: $smp-width) {
+        position: absolute;
+        left: 0px;
+        width: $smp-width;
+        top: $header-height;
+        bottom: 0px;
+    }
+
     // box-sizing: border-box;
     // border: 1px solid red;
 

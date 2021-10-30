@@ -1,15 +1,17 @@
 <div [innerHTML]='ldJSON'></div>
 <app-header current='blog'></app-header>
-<lib-ngx-mugen-scroll #stream class='global-content' [provider]='provider' countPerLoadMode='small'>
-    <div libMugenScrollTop style='height: 40px;'>
-        <app-spinner1 [diameter]='20' [isLoading]='isLoading' (clickRefresh)='clickTop()'></app-spinner1>
-    </div>
-    <div *libMugenScrollData='let article = data' class='data'>
-        <app-article [article]='article' (clickTitle)='clickArticle(article)'>
-        </app-article>
-        <mat-divider></mat-divider>
-    </div>
-    <div libMugenScrollBottom style='height: 40px;'>
-        <app-spinner1 [diameter]='20' [isLoading]='isLoading' (clickRefresh)='clickBottom()'></app-spinner1>
-    </div>
-</lib-ngx-mugen-scroll>
+<div class='main'>
+    <lib-ngx-mugen-scroll #stream class='stream' [provider]='provider' countPerLoadMode='small'>
+        <div libMugenScrollTop style='height: 0px;'>
+            <app-spinner1 [diameter]='20' [isLoading]='isLoading' (clickRefresh)='clickTop()'></app-spinner1>
+        </div>
+        <div *libMugenScrollData='let article = data' class='data'>
+            <app-article [article]='article' (clickTitle)='clickArticle(article)'>
+            </app-article>
+            <mat-divider></mat-divider>
+        </div>
+        <div libMugenScrollBottom style='height: 40px;'>
+            <app-spinner1 [diameter]='20' [isLoading]='isLoading' (clickRefresh)='clickBottom()'></app-spinner1>
+        </div>
+    </lib-ngx-mugen-scroll>
+</div>
