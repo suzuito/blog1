@@ -38,6 +38,12 @@ $main1-palette: (
   )
 );
 
+// Define typography
+
+$typography1: mat.define-typography-config(
+  $font-family: 'serif',
+);
+
 // Define themes
 
 // theme1
@@ -51,7 +57,8 @@ $theme-light: mat.define-light-theme((
  color: (
    primary: $theme-light-primary,
    accent: $theme-light-accent,
- )
+ ),
+ typography: $typography1,
 ));
 
 $theme-dark: mat.define-dark-theme((
