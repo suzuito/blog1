@@ -71,14 +71,26 @@ $theme-dark: mat.define-dark-theme((
 @include mat.core-theme($theme-light);
 @include mat.all-component-themes($theme-light);
 
+.light-theme {
+  @include mat.core-color($theme-light);
+  @include mat.all-component-colors($theme-light);
+  background: white;
+}
+
 .dark-theme {
   @include mat.core-color($theme-dark);
   @include mat.all-component-colors($theme-dark);
+  background: black;
 }
 
 // Style
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 a {
     color: inherit;
 }

@@ -1,6 +1,6 @@
 <div [innerHTML]='ldJSON'></div>
 <app-header current='blog-each'></app-header>
-<div class='global-content mat-app-background'>
+<div class='main-content mat-app-background' #mainContent>
     <mat-card>
         <mat-card-content *ngIf='article'>
             <h1 class='title' *ngIf='article'>{{article.title}}</h1>
