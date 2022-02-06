@@ -3,8 +3,6 @@ on:
   push:
     tags:
       - "qa"
-  schedule:
-    - cron: "0 * * * *"
 jobs:
   deploy-suzuito-minilla:
     name: Deploy
