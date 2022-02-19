@@ -5,8 +5,8 @@
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0",
     "build": "ng build",
-    "build-minilla": "ng build --configuration=minilla && bash generate-sitemap.sh https://minilla-api-blog.tach.dev https://minilla-blog.tach.dev dist/blog1 && cp robots-minilla.txt dist/blog1/robots.txt",
-    "build-godzilla": "ng build --configuration=godzilla && bash generate-sitemap.sh https://api-blog.tach.dev https://blog.tach.dev dist/blog1 && cp robots-godzilla.txt dist/blog1/robots.txt",
+    "build-minilla": "ng build --configuration=minilla && cp robots-minilla.txt dist/blog1/robots.txt",
+    "build-godzilla": "ng build --configuration=godzilla && cp robots-godzilla.txt dist/blog1/robots.txt",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
