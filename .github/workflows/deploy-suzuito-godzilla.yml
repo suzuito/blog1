@@ -2,7 +2,7 @@ name: deploy-suzuito-godzilla
 on:
   push:
     tags:
-      - "^v[0-9]+\.[0-9]+\.[0-9]+$"
+      - "^v[0-9]+.[0-9]+.[0-9]+$"
 jobs:
   deploy-suzuito-godzilla:
     name: Deploy
